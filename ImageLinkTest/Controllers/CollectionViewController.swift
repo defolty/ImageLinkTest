@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+ 
 // MARK: - UICollectionViewLayout
 
 extension CollectionViewController: UICollectionViewDelegateFlowLayout {
@@ -41,41 +41,36 @@ extension CollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageModel.imagesArray.count
     }
-      
+     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Con.reuseIdentifier, for: indexPath) as! CollectionViewCell
-        return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? CollectionViewCell else { return }
-             
         let itemNumber = NSNumber(value: indexPath.item)
-          
+        
         if let cachedImage = self.cache.object(forKey: itemNumber) {
             
             /// debug toasts
             if let viewWithTag = self.view.viewWithTag(1) {
-                    viewWithTag.removeFromSuperview()
+                viewWithTag.removeFromSuperview()
             }
             /// debug toasts
             showToast(message: "cached image for item: \(itemNumber)", font: .systemFont(ofSize: 13))
             
             cell.forImage.image = cachedImage
-              
+            
         } else {
             
-            self.loadImage(currentUrl: imageModel.imagesArray[indexPath.row]) { [weak self] (image) in
+            self.loadImage(currentUrl: imageModel.imagesArray[indexPath.row]) {  [weak self] (image) in
                 guard let self = self, let image = image else { return }
-                 
+                
                 cell.forImage.image = image
                 self.cache.setObject(image, forKey: itemNumber)
             }
         }
-    } 
+        return cell
+    }
 }
 
-// MARK: - CollectionViewController
+// MARK: - UICollectionViewController
 
 class CollectionViewController: UICollectionViewController {
      
@@ -94,6 +89,12 @@ class CollectionViewController: UICollectionViewController {
         cache.countLimit = 60
         getLinks()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+         
+        navigationController?.hidesBarsOnTap = false
+    }
       
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Con.segueId {
@@ -105,7 +106,7 @@ class CollectionViewController: UICollectionViewController {
     }
     
 // MARK: - Image Loading
-    
+     
     private func loadImage(currentUrl: String, completion: @escaping (UIImage?) -> ()) {
         utilityQueue.async {
             let url = URL(string: currentUrl)!
