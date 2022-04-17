@@ -50,8 +50,9 @@
 		FB5C9939280B17F200B945A2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FB7F0A4C28086148009AF6E1 /* AppDelegate.swift */,
-				FB7F0A4E28086148009AF6E1 /* SceneDelegate.swift */,
+				FB5C994C280C738800B945A2 /* App */,
+				FB5C9948280C4DD700B945A2 /* Extensions.swift */,
+				FB5C994A280C4E5E00B945A2 /* Constants.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -81,6 +82,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		FB5C994C280C738800B945A2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				FB7F0A4C28086148009AF6E1 /* AppDelegate.swift */,
+				FB7F0A4E28086148009AF6E1 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		FB7F0A4028086148009AF6E1 = {
 			isa = PBXGroup;
 			children = (
@@ -100,13 +110,11 @@
 		FB7F0A4B28086148009AF6E1 /* ImageLinkTest */ = {
 			isa = PBXGroup;
 			children = (
-				FB5C9945280B754200B945A2 /* Model */,
 				FB7F0A692808C1E4009AF6E1 /* View */,
+				FB5C9945280B754200B945A2 /* Model */,
 				FB5C9947280B756A00B945A2 /* Cell */,
 				FB5C9946280B756000B945A2 /* Controllers */,
 				FB5C9939280B17F200B945A2 /* Supporting Files */,
-				FB5C9948280C4DD700B945A2 /* Extensions.swift */,
-				FB5C994A280C4E5E00B945A2 /* Constants.swift */,
 				FB7F0A552808614A009AF6E1 /* Assets.xcassets */,
 				FB7F0A572808614A009AF6E1 /* LaunchScreen.storyboard */,
 				FB7F0A5A2808614A009AF6E1 /* Info.plist */,

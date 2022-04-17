@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  ImageLinkTest
 //
-//  Created by Nikita Nesporov on 14.04.2022.
+//  Created by Nikita Nesporov on 17.04.2022.
 //
 
 import UIKit

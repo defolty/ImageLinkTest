@@ -13,8 +13,8 @@ class CollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        layoutIfNeeded()
         
+        layoutIfNeeded()
         forImage.layer.cornerRadius = forImage.frame.height / 4
         forImage.layer.borderWidth = 5
         forImage.layer.borderColor = UIColor.gray.cgColor

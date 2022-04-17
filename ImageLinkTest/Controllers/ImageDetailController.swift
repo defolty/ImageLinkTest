@@ -11,15 +11,14 @@ class ImageDetailController: UIViewController {
     
     @IBOutlet weak var fullSizeImage: UIImageView!
     @IBOutlet var pinchGestureOutlet: UIPinchGestureRecognizer!
-    
-    private let cache = NSCache<NSNumber, UIImage>()
+     
     var selectedImage: UIImage?
      
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fullSizeImage.image = selectedImage
         navigationController?.hidesBarsOnTap = true
+        fullSizeImage.image = selectedImage
     }
     
     @IBAction func pinchTapped(_ sender: UIPinchGestureRecognizer) {
@@ -29,19 +28,16 @@ class ImageDetailController: UIViewController {
                                                                y: pinchGestureOutlet.scale)
         pinchGestureOutlet.scale = 1
         
-        if pinchGestureOutlet.state == .began {
+        switch pinchGestureOutlet.state {
+        case .began, .changed:
             navigationController?.isNavigationBarHidden = true
-        }
-        
-        if pinchGestureOutlet.state == .changed {
-            navigationController?.isNavigationBarHidden = true
-        }
-        
-        if pinchGestureOutlet.state == .ended {
+        case .ended:
             UIView.animate(withDuration: 0.5) {
                 self.fullSizeImage.transform = CGAffineTransform(scaleX: 1, y: 1)
                 self.navigationController?.isNavigationBarHidden = false
             }
-        }
+        default:
+            print("default case .state")
+        } 
     }
 }

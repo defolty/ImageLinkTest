@@ -14,7 +14,6 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-         
         return CGSize(width: screenWidth / 2.1, height: screenWidth / 2.1)
     }
     
@@ -50,29 +49,25 @@ extension CollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? CollectionViewCell else { return }
-                
+             
         let itemNumber = NSNumber(value: indexPath.item)
           
         if let cachedImage = self.cache.object(forKey: itemNumber) {
+            
+            /// debug toasts
             if let viewWithTag = self.view.viewWithTag(1) {
                     viewWithTag.removeFromSuperview()
             }
-            
+            /// debug toasts
             showToast(message: "cached image for item: \(itemNumber)", font: .systemFont(ofSize: 13))
             
             cell.forImage.image = cachedImage
-            
+              
         } else {
             
             self.loadImage(currentUrl: imageModel.imagesArray[indexPath.row]) { [weak self] (image) in
                 guard let self = self, let image = image else { return }
-                
-                if let viewWithTag = self.view.viewWithTag(1) {
-                        viewWithTag.removeFromSuperview()
-                }
-                
-                self.showToast(message: "fetching images", font: .systemFont(ofSize: 13))
-                
+                 
                 cell.forImage.image = image
                 self.cache.setObject(image, forKey: itemNumber)
             }
@@ -80,9 +75,12 @@ extension CollectionViewController {
     } 
 }
 
+// MARK: - CollectionViewController
+
 class CollectionViewController: UICollectionViewController {
      
     private let cache = NSCache<NSNumber, UIImage>()
+     
     private let utilityQueue = DispatchQueue.global(qos: .utility)
                     
     private let screenWidth = UIScreen.main.bounds.size.width
@@ -93,25 +91,27 @@ class CollectionViewController: UICollectionViewController {
         super.viewDidLoad()
    
         self.title = ""
+        cache.countLimit = 60
         getLinks()
     }
       
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Con.segueId {
-                let destinationController = segue.destination as! ImageDetailController
-                let cell = sender as! CollectionViewCell
-                
-                destinationController.selectedImage = cell.forImage.image
+            let destinationController = segue.destination as! ImageDetailController
+            let cell = sender as! CollectionViewCell
+            
+            destinationController.selectedImage = cell.forImage.image
         }
     }
     
-    // MARK: - Image Loading
+// MARK: - Image Loading
     
     private func loadImage(currentUrl: String, completion: @escaping (UIImage?) -> ()) {
         utilityQueue.async {
             let url = URL(string: currentUrl)!
             
             guard let data = try? Data(contentsOf: url) else { return }
+            
             let image = UIImage(data: data)
             
             DispatchQueue.main.async {
@@ -119,6 +119,8 @@ class CollectionViewController: UICollectionViewController {
             }
         }
     }
+    
+// MARK: - Get Filtered Links
     
     private func getLinks() {
         if let url = URL(string: Con.mainUrl) {
