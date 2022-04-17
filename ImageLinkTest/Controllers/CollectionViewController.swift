@@ -7,8 +7,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
- 
 // MARK: - UICollectionViewLayout
 
 extension CollectionViewController: UICollectionViewDelegateFlowLayout {
@@ -46,7 +44,7 @@ extension CollectionViewController {
     }
       
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! CollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Con.reuseIdentifier, for: indexPath) as! CollectionViewCell
         return cell
     }
     
@@ -56,13 +54,24 @@ extension CollectionViewController {
         let itemNumber = NSNumber(value: indexPath.item)
           
         if let cachedImage = self.cache.object(forKey: itemNumber) {
-            print("Using a cached image for item: \(itemNumber)")
+            if let viewWithTag = self.view.viewWithTag(1) {
+                    viewWithTag.removeFromSuperview()
+            }
+            
+            showToast(message: "cached image for item: \(itemNumber)", font: .systemFont(ofSize: 13))
             
             cell.forImage.image = cachedImage
+            
         } else {
+            
             self.loadImage(currentUrl: imageModel.imagesArray[indexPath.row]) { [weak self] (image) in
                 guard let self = self, let image = image else { return }
-                print("start download")
+                
+                if let viewWithTag = self.view.viewWithTag(1) {
+                        viewWithTag.removeFromSuperview()
+                }
+                
+                self.showToast(message: "fetching images", font: .systemFont(ofSize: 13))
                 
                 cell.forImage.image = image
                 self.cache.setObject(image, forKey: itemNumber)
@@ -80,16 +89,14 @@ class CollectionViewController: UICollectionViewController {
     
     private var imageModel = Image()
      
-    private let mainUrl = "https://it-link.ru/test/images.txt"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
   
-        getLinks() 
+        getLinks()
     }
       
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
+        if segue.identifier == Con.segueId {
                 let destinationController = segue.destination as! ImageDetailController
                 let cell = sender as! CollectionViewCell
                 
@@ -113,7 +120,7 @@ class CollectionViewController: UICollectionViewController {
     }
     
     private func getLinks() {
-        if let url = URL(string: mainUrl) {
+        if let url = URL(string: Con.mainUrl) {
             do {
                 let contents = try String(contentsOf: url)
                 let allLinks = contents.components(separatedBy: "\r\n")
@@ -124,5 +131,5 @@ class CollectionViewController: UICollectionViewController {
         } else {
             print("bad url")
         }
-    }
+    } 
 }
