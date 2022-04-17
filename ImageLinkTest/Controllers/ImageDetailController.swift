@@ -6,28 +6,42 @@
 //
 
 import UIKit
-
+ 
 class ImageDetailController: UIViewController {
     
     @IBOutlet weak var fullSizeImage: UIImageView!
+    @IBOutlet var pinchGestureOutlet: UIPinchGestureRecognizer!
     
-    var imageModel = Image()
-    
+    private let cache = NSCache<NSNumber, UIImage>()
+    var selectedImage: UIImage?
+     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // грузить из кеша
-        //fullSizeImage.image = UIImage(named: imageModel.imagesArray)
         
-        if let url = URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqNZNZvSkBzt5rPSmUNYKNG1MpuC6h1LppdQ") {
-            let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                guard let data = data, error == nil else { return }
-                
-                DispatchQueue.main.async {
-                    self.fullSizeImage.image = UIImage(data: data)
-                }
-            }
-            task.resume()
+        fullSizeImage.image = selectedImage
+        navigationController?.hidesBarsOnTap = true
+    }
+    
+    @IBAction func pinchTapped(_ sender: UIPinchGestureRecognizer) {
+        guard let gestureView = pinchGestureOutlet.view else { return }
+        
+        gestureView.transform = gestureView.transform.scaledBy(x: pinchGestureOutlet.scale,
+                                                               y: pinchGestureOutlet.scale)
+        pinchGestureOutlet.scale = 1
+        
+        if pinchGestureOutlet.state == .began {
+            navigationController?.isNavigationBarHidden = true
         }
-    } 
+        
+        if pinchGestureOutlet.state == .changed {
+            navigationController?.isNavigationBarHidden = true
+        }
+        
+        if pinchGestureOutlet.state == .ended {
+            UIView.animate(withDuration: 0.5) {
+                self.fullSizeImage.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.navigationController?.isNavigationBarHidden = false
+            }
+        }
+    }
 }

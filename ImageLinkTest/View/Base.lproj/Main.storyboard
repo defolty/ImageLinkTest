@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KLR-hq-AdA">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -23,6 +23,10 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
+                        <imageView key="backgroundView" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LightBlack" id="ro7-bO-4BB">
+                            <rect key="frame" x="0.0" y="-88" width="414" height="896"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="zl6-Qj-BoO" customClass="CollectionViewCell" customModule="ImageLinkTest" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="190" height="190"/>
@@ -46,7 +50,7 @@
                                 </collectionViewCellContentView>
                                 <connections>
                                     <outlet property="forImage" destination="qHM-vg-WWG" id="jsi-Xb-Jdu"/>
-                                    <segue destination="7u7-iY-Mib" kind="presentation" identifier="showDetail" id="bne-z3-tpF"/>
+                                    <segue destination="7u7-iY-Mib" kind="show" identifier="showDetail" id="bne-z3-tpF"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -66,24 +70,32 @@
             <objects>
                 <viewController id="7u7-iY-Mib" customClass="ImageDetailController" customModule="ImageLinkTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i1G-qM-DjN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LightBlack" translatesAutoresizingMaskIntoConstraints="NO" id="g1Z-UX-bSN">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="prq-Id-iIh">
-                                <rect key="frame" x="20" y="309" width="374" height="224"/>
+                                <rect key="frame" x="20" y="336" width="374" height="224"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ktX-l1-cXs">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="224"/>
+                                    <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ktX-l1-cXs">
+                                        <rect key="frame" x="97" y="22" width="180" height="180"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="180" id="0xU-CF-k5q"/>
+                                            <constraint firstAttribute="width" constant="180" id="jFj-n1-455"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="nPZ-M9-uuP" appends="YES" id="PRq-uv-G4I"/>
+                                        </connections>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="ktX-l1-cXs" firstAttribute="top" secondItem="prq-Id-iIh" secondAttribute="top" id="2YK-RA-5uC"/>
-                                    <constraint firstItem="ktX-l1-cXs" firstAttribute="leading" secondItem="prq-Id-iIh" secondAttribute="leading" id="8uB-eF-8Pz"/>
-                                    <constraint firstAttribute="bottom" secondItem="ktX-l1-cXs" secondAttribute="bottom" id="B6c-LV-nZ8"/>
                                     <constraint firstAttribute="width" secondItem="prq-Id-iIh" secondAttribute="height" multiplier="5:3" id="GY8-tX-ish"/>
                                     <constraint firstItem="ktX-l1-cXs" firstAttribute="centerX" secondItem="prq-Id-iIh" secondAttribute="centerX" id="PQS-lb-KmE"/>
-                                    <constraint firstAttribute="trailing" secondItem="ktX-l1-cXs" secondAttribute="trailing" id="XQC-Al-pdY"/>
                                     <constraint firstItem="ktX-l1-cXs" firstAttribute="centerY" secondItem="prq-Id-iIh" secondAttribute="centerY" id="moK-et-cp3"/>
                                 </constraints>
                             </view>
@@ -97,13 +109,20 @@
                             <constraint firstItem="OuM-OM-Ysb" firstAttribute="trailing" secondItem="prq-Id-iIh" secondAttribute="trailing" constant="20" id="o46-XX-NTT"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="V7w-fH-CWL"/>
                     <connections>
                         <outlet property="fullSizeImage" destination="ktX-l1-cXs" id="noW-IU-VC9"/>
+                        <outlet property="pinchGestureOutlet" destination="nPZ-M9-uuP" id="nSe-EV-fAm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bAc-Be-WOq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="nPZ-M9-uuP">
+                    <connections>
+                        <action selector="pinchTapped:" destination="7u7-iY-Mib" id="3k4-Cx-bHb"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1348" y="479"/>
+            <point key="canvasLocation" x="1346.376811594203" y="478.79464285714283"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hYU-Qe-M16">
@@ -125,6 +144,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="LightBlack" width="292.5" height="633"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

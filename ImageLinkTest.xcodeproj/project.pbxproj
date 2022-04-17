@@ -96,10 +96,10 @@
 		FB7F0A4B28086148009AF6E1 /* ImageLinkTest */ = {
 			isa = PBXGroup;
 			children = (
+				FB5C9945280B754200B945A2 /* Model */,
 				FB7F0A692808C1E4009AF6E1 /* View */,
 				FB5C9947280B756A00B945A2 /* Cell */,
 				FB5C9946280B756000B945A2 /* Controllers */,
-				FB5C9945280B754200B945A2 /* Model */,
 				FB5C9939280B17F200B945A2 /* Supporting Files */,
 				FB7F0A552808614A009AF6E1 /* Assets.xcassets */,
 				FB7F0A572808614A009AF6E1 /* LaunchScreen.storyboard */,
