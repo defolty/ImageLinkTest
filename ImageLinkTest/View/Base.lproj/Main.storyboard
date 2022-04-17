@@ -73,9 +73,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LightBlack" translatesAutoresizingMaskIntoConstraints="NO" id="g1Z-UX-bSN">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LightBlack" translatesAutoresizingMaskIntoConstraints="NO" id="g1Z-UX-bSN">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="prq-Id-iIh">
                                 <rect key="frame" x="20" y="336" width="374" height="224"/>
@@ -105,8 +104,12 @@
                         <constraints>
                             <constraint firstItem="prq-Id-iIh" firstAttribute="centerX" secondItem="i1G-qM-DjN" secondAttribute="centerX" id="CZE-AP-iXX"/>
                             <constraint firstItem="prq-Id-iIh" firstAttribute="leading" secondItem="OuM-OM-Ysb" secondAttribute="leading" constant="20" id="HOJ-b7-Pa9"/>
+                            <constraint firstItem="g1Z-UX-bSN" firstAttribute="leading" secondItem="i1G-qM-DjN" secondAttribute="leading" id="LZu-3P-hRH"/>
+                            <constraint firstItem="g1Z-UX-bSN" firstAttribute="top" secondItem="i1G-qM-DjN" secondAttribute="top" id="Ob0-F9-Ura"/>
                             <constraint firstItem="prq-Id-iIh" firstAttribute="centerY" secondItem="i1G-qM-DjN" secondAttribute="centerY" id="SEg-tt-0qg"/>
                             <constraint firstItem="OuM-OM-Ysb" firstAttribute="trailing" secondItem="prq-Id-iIh" secondAttribute="trailing" constant="20" id="o46-XX-NTT"/>
+                            <constraint firstAttribute="trailing" secondItem="g1Z-UX-bSN" secondAttribute="trailing" id="r8a-2y-xXG"/>
+                            <constraint firstAttribute="bottom" secondItem="g1Z-UX-bSN" secondAttribute="bottom" id="rc7-w0-smd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="V7w-fH-CWL"/>

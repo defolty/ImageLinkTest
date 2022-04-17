@@ -91,7 +91,8 @@ class CollectionViewController: UICollectionViewController {
      
     override func viewDidLoad() {
         super.viewDidLoad()
-  
+   
+        self.title = ""
         getLinks()
     }
       
