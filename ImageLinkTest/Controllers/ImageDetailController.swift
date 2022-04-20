@@ -30,7 +30,7 @@ class ImageDetailController: UIViewController {
         
         switch pinchGestureOutlet.state {
         case .began, .changed:
-            navigationController?.isNavigationBarHidden = true
+            print("view has been moved")
         case .ended:
             UIView.animate(withDuration: 0.5) {
                 self.fullSizeImage.transform = CGAffineTransform(scaleX: 1, y: 1)
