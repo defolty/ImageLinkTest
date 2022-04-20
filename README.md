@@ -8,4 +8,5 @@ Load pictures from a text file with different links, which may not be links.
 - Night theme
 - Pinch to zoom on the screen with a picture
 — Hiding/showing the navbar by clicking on the screen with a picture
+
 ![](https://github.com/defolty/ImageLinkTest/blob/main/ImageLinkTest/GitPreview/ImageLinkTest.gif)
